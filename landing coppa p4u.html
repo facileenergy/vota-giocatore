@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vota il Giocatore dell’Anno – Calcio Padova</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #ffe6e6);
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header img {
+      max-height: 100px;
+      margin: 10px;
+    }
+    h1 {
+      color: #D91B5C; /* fucsia Power4U */
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #FF6F61; /* Arancio Power4U */
+      color: white;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e55d51;
+    }
+    .thank-you {
+      text-align: center;
+      margin-top: 20px;
+      color: green;
+      font-size: 18px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo acp.PNG" alt="Calcio Padova">
+    <img src="coloriesteso.png" alt="Power4U">
+    <h1>Vota il Giocatore dell’Anno!</h1>
+    <p>Compila il modulo e scegli il tuo campione preferito della stagione 2024-2025</p>
+  </header>
+
+  <form id="voteForm">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="cognome">Cognome</label>
+    <input type="text" id="cognome" name="cognome" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="giocatore">Scegli il tuo giocatore preferito</label>
+    <select id="giocatore" name="giocatore" required>
+      <option value="">-- Seleziona un giocatore --</option>
+      <option>Mattia Fortin</option>
+      <option>Filippo Delli Carri</option>
+      <option>Francesco Belli</option>
+      <option>Marco Perrotta</option>
+      <option>Lorenzo Crisetig</option>
+      <option>Kevin Varas</option>
+      <option>Pietro Fusi</option>
+      <option>Alberto Spagnoli</option>
+      <option>Simone Russini</option>
+      <option>Carmine Cretella</option>
+      <option>Michele Voltan</option>
+      <option>Luca Crescenzi</option>
+      <option>Luca Villa</option>
+      <option>Nicolò Bianchi</option>
+      <option>Andrea Sala</option>
+      <option>Alessandro Capelli</option>
+      <option>Nicola Valente</option>
+      <option>Mattia Bortolussi</option>
+      <option>Michael Liguori</option>
+      <option>Matteo Carniello</option>
+      <option>Antonio Granata</option>
+      <option>Niko Kirwan</option>
+      <option>Jérémie Broh</option>
+      <option>Giulio Favale</option>
+      <option>Roberto Pirrello</option>
+      <option>Nicolò Bensi</option>
+      <option>Andrea Montrone</option>
+      <option>Carlo Faedo</option>
+      <option>Alberto Targa</option>
+      <option>Francesco Tumiatti</option>
+      <option>Cristian Buonaiuto</option>
+      <option>Simone Palombi</option>
+      <option>Andrea Beccaro</option>
+    </select>
+
+    <button type="submit">Invia il voto</button>
+  </form>
+
+  <div class="thank-you" id="thankYouMsg">
+    ✅ Grazie per aver votato!
+  </div>
+
+  <script>
+    document.getElementById("voteForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const cognome = document.getElementById("cognome").value;
+      const email = document.getElementById("email").value;
+      const giocatore = document.getElementById("giocatore").value;
+
+      const csvLine = `${nome},${cognome},${email},${giocatore}\n`;
+      const blob = new Blob([csvLine], { type: 'text/csv' });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "voto_giocatore.csv";
+      a.click();
+
+      document.getElementById("voteForm").reset();
+      document.getElementById("thankYouMsg").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
